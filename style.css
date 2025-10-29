@@ -1,0 +1,292 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Force reset radio buttons */
+input[type="radio"] {
+  display: none !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+
+:root {
+  --ink: #fbfebe;
+  --shadow: rgba(0,0,0,.28);
+  --classic: #ffffff;
+  --timer: #ffffff;
+  --btn: #ffb000;
+}
+
+html, body {height:100%;}
+body {
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color:var(--ink);
+  overflow:hidden;
+}
+.screen {
+  position:fixed; inset:0;
+  display:grid; place-items:center;
+}
+#startScreen {
+  background: #000 url("startpage_img.png") center/cover no-repeat;
+}
+#gameScreen {
+  background: #000;
+}
+.hidden { display: none !important; }
+
+.title {
+  margin:0;
+  font-size:clamp(2.2rem,6vw,3.4rem);
+  text-shadow:0 6px 18px rgba(0,0,0,.45);
+  font-weight: 800;
+}
+.instructions {
+  margin: 1.8rem 0 0 0;
+  padding: 1.3rem 2.2rem 1rem 2.2rem;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 16px;
+  box-shadow: 0 3px 16px rgba(0,0,0,0.15);
+  max-width: 440px;
+  text-align: center;
+  font-size: 1.07rem;
+  backdrop-filter: blur(2.5px);
+  color: #fff;
+}
+
+.instructions h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffc247;
+  margin-bottom: 0.7rem;
+  letter-spacing: .01em;
+  text-shadow: 0 2px 7px rgba(0,0,0,0.15);
+  margin-top: 0;
+}
+
+.inst-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.2rem;
+  margin-bottom: 0.55rem;
+}
+
+.inst-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+}
+
+.emoji {
+  font-size: 2rem;
+  line-height: 1.0;
+}
+
+.eggdsc {
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 0.1rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,.18);
+}
+
+.how-controls {
+  margin-top: 0.6rem;
+  font-size: 0.96rem;
+  line-height: 1.4;
+  color: #dfedff;
+  text-shadow: 0 1.5px 5px rgba(0,0,0,0.17);
+}
+
+/* ===== RADIO BUTTONS - START ===== */
+/* ========== RADIO BUTTONS - FRESH START ========== */
+.mode {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.mode-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mode-option:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Hide default radio */
+.mode-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom dot - IDENTICAL for both */
+.mode-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  background: white;
+  border: 3px solid white;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+/* When selected - Classic (gold) */
+.mode-option input:checked ~ .mode-dot {
+  background: #ffc247;
+  border-color: #ffdd98;
+  box-shadow: 0 0 12px rgba(255, 194, 71, 0.6);
+  transform: scale(1.15);
+}
+
+/* Text */
+.mode-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+/* ========== END RADIO BUTTONS ========== */
+
+/* ===== RADIO BUTTONS - END ===== */
+
+
+
+.start {
+  font-size:clamp(1.1rem,2.6vw,1.6rem); font-weight:800;
+  
+  padding:.9rem 2.3rem; border:none; border-radius:999px; color:#5a2d00;
+  background: #ffc823;
+  box-shadow: inset 0 -6px 0 rgba(0,0,0,.15), 0 14px 36px rgba(0,0,0,.35), 0 0 0 3px rgba(255,255,255,.15);
+  cursor:pointer; transition:transform .08s, box-shadow .2s, filter .15s;
+}
+.start:hover{ transform:translateY(-2px); filter:brightness(1.03); }
+
+.hint{ margin-top:.6rem; padding:.4rem .8rem; font-size:0.95rem; font-weight:500; color:#fff;
+  background:rgba(0,0,0,0.35); border-radius:12px; text-shadow:0 1px 3px rgba(0,0,0,.55);
+}
+
+.game-wrap {
+  width: min(100%, 1100px);
+  margin: 0 auto 1rem;
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  background: url('assets/img/game_bg.png') center/cover no-repeat;
+}
+#gameCanvas{ width:100%; height:100%; display:block; background:transparent;}
+
+.game-hud {
+  position: absolute;
+  top: 30px; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 16px;
+  color: #fff; font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,.55);
+  z-index: 5;
+}
+.hud-left{ display:flex; align-items:center; gap:.4rem; }
+.hud-right{ display:flex; align-items:center; gap:.35rem; }
+.hud-right img{ width:26px; height:26px;}
+
+.banner {
+  position:absolute; inset:0; display:grid; place-items:center;
+  background:rgba(0,0,0,.45); backdrop-filter:blur(3px);
+}
+.banner h3{ color:#fff; margin-bottom:.6rem; text-shadow:0 2px 6px rgba(0,0,0,.6); }
+.start.small{ padding:.6rem 1.1rem; font-size:1rem; }
+.banner h3 {
+  color: #fff;
+  margin-bottom: 0.8rem;
+  font-size: 2.5rem;
+  text-shadow: 0 3px 8px rgba(0,0,0,.7);
+}
+
+.banner .msg {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: #ffe066;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0,0,0,.6);
+}
+
+.banner .final-score {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.8rem 0 0.4rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,.6);
+}
+
+.banner .best-score {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffc247;
+  margin: 0.2rem 0 1.2rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,.6);
+}
+
+.banner-buttons {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.start.small.secondary {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+}
+
+.start.small.secondary:hover {
+  background: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.6);
+}
+
+
+.timer {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.timer.warning {
+  color: #ff4444;
+  animation: pulse 0.8s infinite;
+  border-color: #ff4444;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+
+
+

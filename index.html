@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Egg Rush — Start</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- START SCREEN -->
+  <section id="startScreen" class="screen">
+    <h1 class="title">Egg Rush</h1>
+    <div class="mode">
+      <label class="mode-option">
+        <input type="radio" name="mode" value="classic" checked>
+        <span class="mode-dot"></span>
+        <span class="mode-text">Classic</span>
+      </label>
+      
+      <label class="mode-option">
+        <input type="radio" name="mode" value="timer">
+        <span class="mode-dot"></span>
+        <span class="mode-text">Timer</span>
+      </label>
+    </div>
+    <button id="startButton" class="start">Start</button>
+    <div class="instructions">
+  <h3>How to Play</h3>
+  <div class="inst-row">
+    <div class="inst-item">
+      <span class="emoji">🥚</span>
+      <span class="eggdsc">Normal: <strong>+1</strong></span>
+    </div>
+    <div class="inst-item">
+      <span class="emoji">✨</span>
+      <span class="eggdsc">Golden: <strong>+5</strong></span>
+    </div>
+    <div class="inst-item">
+      <span class="emoji">🤢</span>
+      <span class="eggdsc">Rotten: <strong>-2</strong></span>
+    </div>
+  </div>
+  <div class="how-controls">
+    🎮 Use ← → arrows or mouse/touch to move<br>
+    <span style="color:#ffc247;">Classic: 3 lives</span>
+    <span style="color:#ffc247;">• Timer: 60 seconds</span>
+  </div>
+</div>
+
+  </section>
+
+  <!-- GAME SCREEN -->
+  <section id="gameScreen" class="screen hidden">
+    <div class="game-wrap">
+      <!-- HUD -->
+      <div class="game-hud">
+        <div class="hud-left">
+          <span class="label">Score:</span>
+          <span id="score">0</span>
+        </div>
+        <div class="hud-right">
+          <div id="lives"></div>
+          <div id="timer" class="timer hidden">⏱️ <span id="timeLeft">60</span>s</div>
+        </div>
+      </div>
+      
+      <!-- Canvas -->
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- Game Over Banner -->
+      <div id="gameOverBanner" class="banner hidden">
+        <h3>Game Over</h3>
+        <p id="encouragingMsg" class="msg">Keep trying! 🐣</p>
+        <p class="final-score">Your Score: <span id="finalScore">0</span></p>
+        <p class="best-score">Best Score: <span id="bestScore">0</span></p>
+        <div class="banner-buttons">
+          <button id="playAgain" class="start small">Play Again</button>
+          <button id="backToStart" class="start small secondary">Back to Start</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+
+  
+  
+  
+
+</body>
+</html>

@@ -287,6 +287,18 @@ body {
   50% { transform: scale(1.05); }
 }
 
+@media (max-width: 600px) {
+  body {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  canvas {
+    touch-action: none;
+  }
+}
+
+
 
 
 

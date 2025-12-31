@@ -1,5 +1,3 @@
-
-// --- mode pick from start screen ---
 let selectedMode = "classic";
 let bestScore = 0;
 let timeLeft = 60;
@@ -16,7 +14,6 @@ function resetPlayerModel() {
   playerModel.totalEggs = 0;
 }
 
-
 let audioUnlocked = false;
 //My player Model
 const playerModel = {
@@ -26,15 +23,15 @@ const playerModel = {
   maxStreak: 0,
   totalEggs: 0
 };
-// --- Adaptive Difficulty (GLOBAL) ---
 
+//Debug logs for adaptive difficulty tuning
 function adaptDifficulty() {
   if (playerModel.totalEggs < 3) return;
 
   const now = performance.now();
   const accuracy = playerModel.caught / playerModel.totalEggs;
 
-  // 🚨 EMERGENCY EASING (fast, streak-based)
+  //  EMERGENCY EASING (fast, streak-based)
   if (playerModel.streak === 0 && playerModel.missed >= 2) {
     if (spawnEvery < 900) {
       spawnEvery += 50;
@@ -44,7 +41,7 @@ function adaptDifficulty() {
         { spawnEvery }
       );
       lastAdaptTime = now;
-      return; // ⛔ skip rest
+      return; //  skip rest
     }
   }
 
@@ -52,7 +49,7 @@ function adaptDifficulty() {
   const cooldown = accuracy < 0.45 ? 600 : 2000;
   if (now - lastAdaptTime < cooldown) return;
 
-  // 🔥 HARDER (slow & controlled)
+  // HARDER 
   if (accuracy > 0.7 && spawnEvery > 350) {
     spawnEvery -= 25;
     console.log(
@@ -62,7 +59,7 @@ function adaptDifficulty() {
     );
   }
 
-  // 🧊 EASIER (still allowed, but secondary)
+  // EASIER
   else if (accuracy < 0.45 && spawnEvery < 900) {
     spawnEvery += 30;
     console.log(
@@ -75,15 +72,10 @@ function adaptDifficulty() {
   lastAdaptTime = now;
 }
 
-
-
-
-
 function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
 }
-
 
 function playStartMusic() {
   if (!audioUnlocked) return;
@@ -96,16 +88,11 @@ function playStartMusic() {
   MUSIC_START.play().catch(()=>{});
 }
 
-
-
-
-
 document.querySelectorAll('input[name="mode"]').forEach(i=>{
   i.addEventListener("change",()=> selectedMode = i.value);
 });
 
 const startBtn = document.getElementById("startButton");
-// --- SOUND EFFECTS ---
 // --- AUDIO: SFX + MUSIC ---
 const SOUNDS = {
   button:     new Audio("assets/sound/button.mp3"),
@@ -124,10 +111,8 @@ function createStartMusic() {
 }
 
 
-let startMusicPlaying = false;
 
-
-// volumes (tweak if you like)
+// volumes 
 for (let k in SOUNDS) SOUNDS[k].volume = 0.6;
 
 // background music (looping)
@@ -136,7 +121,6 @@ MUSIC.loop = true;
 MUSIC.volume = 0.35;
 
 let gameMusicPlaying = false;
-
 
 // helper: play SFX reliably (clones so rapid repeats don’t cut off)
 function playSfx(audio){
@@ -149,20 +133,13 @@ function playSfx(audio){
   }
 }
 
-
-
-
-
 const startScreen = document.getElementById("startScreen");
 const gameScreen = document.getElementById("gameScreen");
 const scoreEl = document.getElementById("score");
 const livesEl = document.getElementById("lives");
 const canvas = document.getElementById("gameCanvas");
 
-
-
-
-// 🔊 All buttons (including Start) get the click sound
+// 🔊 All buttons get the click sound
 document.querySelectorAll("button").forEach(btn => {
   btn.addEventListener("click", () => playSfx(SOUNDS.button));
 });
@@ -172,17 +149,16 @@ document.querySelectorAll('input[type="radio"][name="mode"]').forEach(radio => {
   radio.addEventListener("change", () => playSfx(SOUNDS.button));
 });
 
-
 startBtn.onclick = () => {
   unlockAudio();
 
-  // 💣 DESTROY start music completely (FIRST-TIME FIX)
+  //  DESTROY start music completely (FIRST-TIME FIX)
   if (MUSIC_START) {
     MUSIC_START.pause();
     MUSIC_START.src = "";
     MUSIC_START.load();
     MUSIC_START = null;
-    startMusicPlaying = false;
+    
   }
 
   // 🎮 start game music (ONCE)
@@ -204,7 +180,7 @@ startBtn.onclick = () => {
 };
 
 
-// 🔊 Play button sound for all buttons (except Start) + radio inputs
+// 🔊 Play button sound for all buttons  + radio inputs
 function playButtonSound() {
   try {
     SOUNDS.button.currentTime = 0;
@@ -226,7 +202,6 @@ document.querySelectorAll('input[type="radio"][name="mode"]').forEach(radio => {
   radio.addEventListener("change", playButtonSound);
 });
 
-
 const ctx = canvas.getContext("2d");
 const dpr = Math.max(1, window.devicePixelRatio || 1);
 
@@ -244,18 +219,9 @@ function loadImage(src){ return new Promise(res=>{ const i=new Image(); i.onload
 
 let imgs, score, lives, eggs, chickens, basket, lastT, lastSpawn, spawnEvery, paused;
 
-function sizeCanvas(){
-  let w, h;
-
-  if (window.innerWidth < 600) {
-    // 📱 Mobile (portrait)
-    w = window.innerWidth;
-    h = Math.round(window.innerHeight * 0.55);
-  } else {
-    // 💻 Desktop
-    w = Math.min(window.innerWidth, 1100);
-    h = Math.round(w * 9 / 16);
-  }
+function sizeCanvas() {
+  const w = Math.min(window.innerWidth, 1100);
+  const h = Math.round(w * 9 / 16);
 
   canvas.style.width = w + "px";
   canvas.style.height = h + "px";
@@ -265,6 +231,7 @@ function sizeCanvas(){
 
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
+
 
 
 function layoutChickens(){
@@ -332,25 +299,6 @@ let keys = new Set();
 document.addEventListener("keydown", e=>{ keys.add(e.key); });
 document.addEventListener("keyup", e=>{ keys.delete(e.key); });
 
-
-let dragging=false;
-canvas.addEventListener("pointerdown", e => {
-  dragging = true;
-  canvas.setPointerCapture(e.pointerId);
-});
-
-canvas.addEventListener("pointerup", e => {
-  dragging = false;
-  canvas.releasePointerCapture(e.pointerId);
-});
-
-canvas.addEventListener("pointermove", e=>{
-  if (!basket) return;
-
-  if(!dragging) return;
-  const r = canvas.getBoundingClientRect();
-  basket.x = Math.max(basket.w/2, Math.min(r.width - basket.w/2, e.clientX - r.left));
-});
 
 canvas.addEventListener("mousemove", e => {
   
@@ -528,6 +476,9 @@ function loop(t){
 }
 
 async function initClassic(){
+  resetPlayerModel();
+  lastAdaptTime = 0;
+
   sizeCanvas();
   window.addEventListener("resize", sizeCanvas, { passive:true });
   
@@ -602,12 +553,14 @@ function handleCatchTimer(){
       e.x >= bxL && e.x <= bxR;
 
     if (caught) {
-      playerModel.caught++;
-      playerModel.totalEggs++;
-      playerModel.streak++;
-      playerModel.maxStreak = Math.max(playerModel.maxStreak, playerModel.streak);
-
-      adaptDifficulty();
+      if (e.type==="normal"){
+        playerModel.caught++;
+        playerModel.totalEggs++;
+        playerModel.streak++;
+        playerModel.maxStreak = Math.max(playerModel.maxStreak, playerModel.streak);
+        adaptDifficulty();
+      }
+      
       eggs.splice(i, 1);
       score = Math.max(0, score + pointsFor(e.type));
       scoreEl.textContent = score;
@@ -626,17 +579,22 @@ function handleMissTimer(){
     const e = eggs[i];
     // Just remove eggs that fall off screen (NO life penalty in timer mode)
     if(e.y - e.h/2 > canvas.clientHeight){
-      playerModel.missed++;
-      playerModel.totalEggs++;
-      playerModel.streak = 0;
+      if (e.type==="normal"){
+        playerModel.missed++;
+        playerModel.totalEggs++;
+        playerModel.streak = 0;
 
-      adaptDifficulty();
+        adaptDifficulty();
+      }
       eggs.splice(i,1);
     }
   }
 }
 
 async function initTimer(){
+  resetPlayerModel();
+  lastAdaptTime = 0;
+
   sizeCanvas();
   window.addEventListener("resize", sizeCanvas, { passive:true });
   
@@ -692,12 +650,9 @@ async function initTimer(){
 // 🔁 PLAY AGAIN BUTTON LOGIC
 document.getElementById("playAgain").onclick = () => {
   // 🧹 Reset adaptive stats
-  playerModel.caught = 0;
-  playerModel.missed = 0;
-  playerModel.streak = 0;
-  playerModel.maxStreak = 0;
-  playerModel.totalEggs = 0;
+  resetPlayerModel();
   lastAdaptTime = 0;
+
 
   // 🧹 Reset gameplay state
   eggs = [];

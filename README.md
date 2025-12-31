@@ -1,7 +1,7 @@
 # 🥚 Egg Rush – Adaptive Difficulty Game
 
 Egg Rush is a browser-based arcade game where players catch falling eggs using a basket.
-What makes this game unique is its **AI-powered adaptive difficulty system** that adjusts gameplay in real time based on player performance.
+What makes this game unique is its **AI-inspired adaptive difficulty system** that adjusts gameplay in real time based on player performance.
 
 ---
 
@@ -17,7 +17,7 @@ What makes this game unique is its **AI-powered adaptive difficulty system** tha
 
 ---
 
-## 🧠 Adaptive Difficulty (AI Feature)
+## 🧠 Adaptive Difficulty (Game AI Feature)
 
 This game includes a **dynamic difficulty adjustment system** inspired by game AI principles.
 
@@ -27,14 +27,14 @@ The game continuously tracks:
 - Accuracy
 - Current streak
 
-Based on player accuracy:
-- If accuracy is **high**, egg spawn speed increases (harder)
-- If accuracy drops, the game **eases difficulty faster** to help the player recover
+Based on player performance:
+- High accuracy → egg spawn speed increases (harder)
+- Low accuracy → difficulty eases to help recovery
 - Emergency easing prevents unfair difficulty spikes
 
-This creates a **personalized experience for every player**.
+This creates a **personalized experience for every playthrough**.
 
-> No machine learning model is used — instead, real-time player behavior analytics and adaptive logic are applied (commonly used in commercial games).
+> No machine learning model is used — instead, real-time player behavior analytics and rule-based adaptive logic are applied (a common approach in commercial games).
 
 ---
 
@@ -53,11 +53,20 @@ This creates a **personalized experience for every player**.
 
 ---
 
+## 🖥️ Controls
+
+- Mouse movement – move the basket
+- Keyboard (optional) – Arrow keys or A/D
+
+> ⚠️ This game is optimized for desktop browsers. Mobile support is limited.
+
+---
+
 ## 🛠️ Tech Stack
 
 - **HTML5 Canvas** – rendering game graphics
 - **CSS3** – UI styling
-- **Vanilla JavaScript** – game logic, physics, AI adaptivity
+- **Vanilla JavaScript** – game logic, collision handling, adaptive difficulty
 - **Browser Audio API** – sound effects & background music
 - **Git & GitHub** – version control
 
@@ -65,8 +74,8 @@ This creates a **personalized experience for every player**.
 
 ## 🚀 How to Run Locally
 
-Because browsers restrict audio autoplay, this game must be run using a local server.
+To ensure sound effects and background music work correctly, the game should be run using a local server (due to browser autoplay restrictions).
 
-### Option 1: Python (recommended)
+### Using Python
 ```bash
 python -m http.server

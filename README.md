@@ -1,23 +1,23 @@
-# 🥚 Egg Rush – Adaptive Difficulty Game
+# Egg Rush – Adaptive Difficulty Game
 
 Egg Rush is a browser-based arcade game where players catch falling eggs using a basket.
 What makes this game unique is its **AI-inspired adaptive difficulty system** that adjusts gameplay in real time based on player performance.
 
 ---
 
-## 🎮 Gameplay Overview
+##  Gameplay Overview
 
 - Chickens drop eggs from above
 - Move the basket to catch eggs
 - Different egg types:
-  - 🥚 Normal Egg → +1 point
-  - 🌟 Golden Egg → +5 points
-  - 💀 Rotten Egg → −2 points
+  - Normal Egg → +1 point
+  - Golden Egg → +5 points
+  - Rotten Egg → −2 points
 - Missing normal eggs reduces lives (Classic mode)
 
 ---
 
-## 🧠 Adaptive Difficulty (Game AI Feature)
+## Adaptive Difficulty (Game AI Feature)
 
 This game includes a **dynamic difficulty adjustment system** inspired by game AI principles.
 
@@ -38,7 +38,7 @@ This creates a **personalized experience for every playthrough**.
 
 ---
 
-## 🕹️ Game Modes
+##  Game Modes
 
 ### Classic Mode
 - Limited lives
@@ -53,7 +53,7 @@ This creates a **personalized experience for every playthrough**.
 
 ---
 
-## 🖥️ Controls
+## Controls
 
 - Mouse movement – move the basket
 - Keyboard (optional) – Arrow keys or A/D
@@ -62,7 +62,7 @@ This creates a **personalized experience for every playthrough**.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **HTML5 Canvas** – rendering game graphics
 - **CSS3** – UI styling
@@ -72,7 +72,7 @@ This creates a **personalized experience for every playthrough**.
 
 ---
 
-## 🚀 How to Run Locally
+## How to Run Locally
 
 To ensure sound effects and background music work correctly, the game should be run using a local server (due to browser autoplay restrictions).
 

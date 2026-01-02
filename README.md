@@ -3,6 +3,8 @@
 Egg Rush is a browser-based arcade game where players catch falling eggs using a basket.
 What makes this game unique is its **AI-inspired adaptive difficulty system** that adjusts gameplay in real time based on player performance.
 
+Live demo:https://nehaaa2108.github.io/egg-rush/
+
 ---
 
 ##  Gameplay Overview
